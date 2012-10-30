@@ -5,7 +5,7 @@
 	<groupId>co.ntier.mojo</groupId>
 	<artifactId>embedded-tomcat</artifactId>
 	<packaging>maven-plugin</packaging>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 
 	<name>Embedded Tomcat Mojo</name>
 	<description>A plugin that combined embedded Tomcat with Mongo Session Management</description>
@@ -88,7 +88,37 @@
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
+	<!-- 
+	mvn -DaltDeploymentRepository=snapshot-repo::default::file:/Users/dwelch/dev/maven-repo/releases clean deploy	
+	mvn -DaltDeploymentRepository=snapshot-repo::default::file:/Users/dwelch/dev/maven-repo/snapshots clean deploy
+	 -->
+
+	<distributionManagement>
+		<repository>
+			<id>repo</id>
+			<url>https://github.com/dwelch2344/maven-repo/raw/master/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshot-repo</id>
+			<url>https://github.com/dwelch2344/maven-repo/raw/master/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
 
 </project>
